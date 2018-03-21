@@ -51,5 +51,11 @@ class ExampleTest extends TestCase
             ->assertDontSee($threadNotInChannel->title);
     }
 
+    /** @test */
+    function a_user_can_filter_threads_by_any_username()
+    {
+        
+    }
+
 
 }
