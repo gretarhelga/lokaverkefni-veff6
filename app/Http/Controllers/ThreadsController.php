@@ -16,10 +16,18 @@ class ThreadsController extends Controller
     public function index(Channel $channel)
     {
         if ($channel->exists) {
-            $threads = $channel->threads()->latest()->get();
+            $threads = $channel->threads()->latest();
         } else {
-            $threads = Thread::latest()->get();
+            $threads = Thread::latest();
         }
+
+        if ($username = request("by")) {
+            $user = \App\User::where("name", $username)->firstOrFail();
+
+            $threads->where("user_id", $user->id);
+        }
+
+        $threads = $threads->get();
 
     	return view("threads.index", compact("threads"));
     }
@@ -46,9 +54,29 @@ class ThreadsController extends Controller
 
     	return redirect($thread->path());
     }
+
     public function create()
     {
         return view("threads.create");
+    }
+
+    protected function getThreads(Channel $channel)
+    {
+        if ($channel->exists) {
+            $threads = $channel->threads()->latest();
+        } else {
+            $threads = Thread::latest();
+        }
+
+        if ($username = request("by")) {
+            $user = \App\User::where("name", $username)->firstOrFail();
+
+            $threads->where("user_id", $user->id);
+        }
+
+        $threads = $threads->get();
+
+        return view("threads.index", compact("threads"));    
     }
 
 }
