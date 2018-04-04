@@ -12,7 +12,14 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <style>
+        body {padding-bottom: 100px; }
+        .level { display: flex; align-items: center; }
+        .flex { flex: 1; }
+    </style>
 </head>
+
 <body style="padding-bottom: 100px;">
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
@@ -34,10 +41,15 @@
                             </a>
                             <ul>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+
                                     <li><a class="dropdown-item" href="/threads">All Threads</a></li>
+
                                     @if(auth()->check())
                                         <li><a class="dropdown-item" href="/threads?by={{ auth()->user()->name }}">My Threads</a></li>
                                     @endif
+
+                                    <li><a class="dropdown-item" href="/threads?popular=1">Popular Threads</a></li>
+
                                 </div>
                             </ul>
                         </li>

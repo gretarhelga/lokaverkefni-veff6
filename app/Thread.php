@@ -2,11 +2,21 @@
 
 namespace App;
 
+use App\Filters\ThreadFilters;
 use Illuminate\Database\Eloquent\Model;
 
 class Thread extends Model
 {
 	protected $guarded = [];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope("replyCount", function ($builder) {
+            $builder->withCount("replies");
+        });
+    }
 
     public function path()
     {
@@ -32,4 +42,10 @@ class Thread extends Model
     {
     	$this->replies()->create($reply);
     }
+
+    public function scopeFilter($query, $filters)
+    {
+        return $filters->apply($query);
+    }
+
 }

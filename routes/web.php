@@ -17,7 +17,7 @@ Route::post("/threads/{channel}/{thread}/replies", "RepliesController@store");
 
 
 
-//kominn a þatt 15 min 1:29
+//kominn a þatt 18
 
 
 
