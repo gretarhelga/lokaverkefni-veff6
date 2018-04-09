@@ -18,7 +18,7 @@ Route::post("/replies/{reply}/favorites", "FavoritesController@store");
 
 
 
-//kominn a þatt 19 min 5:36
+//kominn a þatt 20 min 5:22
 
 
 
