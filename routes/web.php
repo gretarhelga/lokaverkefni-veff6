@@ -16,9 +16,9 @@ Route::get("threads/{channel}", "ThreadsController@index");
 Route::post("/threads/{channel}/{thread}/replies", "RepliesController@store");
 Route::post("/replies/{reply}/favorites", "FavoritesController@store");
 
+Route::get("profiles/{user}", "ProfilesController@show")->name("profile");
 
-
-//kominn a þatt 20 min 5:22
+//kominn a þatt 23
 
 
 
