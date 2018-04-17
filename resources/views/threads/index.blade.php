@@ -4,14 +4,10 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="panel panel-default">
-                <div class="panel-heading">Forum Threads</div>
-
-                <div class="panel-body">
-
-                    @foreach ($threads as $thread)
-                    <article>
-                        <div class="level">
+            @forelse ($threads as $thread)
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                         <div class="level">
                             <h4 class="flex">
                                 <a href="{{ $thread->path() }}">
                                     {{ $thread->title }}
@@ -20,14 +16,16 @@
                             <a href="{{ $thread->path() }}">
                                 {{ $thread->replies_count }} {{ str_plural("reply", $thread->replies_count) }}
                             </a>
-                        </div>
-                        <div class="body">{{ $thread->body }}</div>
-                    </article>
+                        </div>                       
+                    </div>
 
-                    <hr>
-                    @endforeach
+                    <div class="panel-body">
+                        <div class="body">{{ $thread->body }}</div>
+                    </div>
                 </div>
-            </div>
+            @empty
+                <p>There are no relevent results at this time.</p>
+            @endforelse
         </div>
     </div>
 </div>
