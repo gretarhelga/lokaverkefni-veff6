@@ -14,6 +14,10 @@ protected static function bootRecordsActivity()
             $model->recordActivity($event);
         });
     }
+
+    static::deleting(function ($model) {
+        $model->activity()->delete();
+    });
 }
 
 protected static function getActivitiesToRecord()

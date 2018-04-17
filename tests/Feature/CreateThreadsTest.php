@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\Activity;
 
 class CreateThreadsTest extends TestCase
 {
@@ -79,8 +80,8 @@ class CreateThreadsTest extends TestCase
 	{
 		$this->signIn();
 
-		$thread = create("App\Thread", ["user_id" => auth()->id()]);
-		$reply = create("App\Reply", ["thread_id" => $thread->id]);
+		$thread = create('App\Thread', ['user_id' => auth()->id()]);
+        $reply = create('App\Reply', ['thread_id' => $thread->id]);
 
 		$response = $this->json("DELETE", $thread->path());
 
@@ -88,6 +89,18 @@ class CreateThreadsTest extends TestCase
 
 		$this->assertDatabaseMissing("threads", ["id" => $thread->id]);
 		$this->assertDatabaseMissing("replies", ["id" => $reply->id]);
+
+		$this->assertEquals(0, Activity::count());
+
+		// $this->assertDatabaseMissing("activities", [
+		// 	"subject_id" => $thread->id,
+		// 	"subject_type" => get_class($thread)
+		// ]);
+
+		// $this->assertDatabaseMissing("activities", [
+		// 	"subject_id" => $reply->id,
+		// 	"subject_type" => get_class($reply)
+		// ]);
 	} 	
 
 
