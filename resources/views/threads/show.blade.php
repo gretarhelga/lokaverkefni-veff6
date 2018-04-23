@@ -4,13 +4,13 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8">
-            <div class="panel panel-default">
-                <div class="panel-heading">
+            <div class="card">
+                <div class="card-header">
                     <div class="level">
-                        <span class="flex">
+                        <h5 class="flex">
                              <a href="{{ route("profile", $thread->creator) }}">{{ $thread->creator->name }}</a> Posted:
                             {{ $thread->title }}                           
-                        </span>
+                        </h5>
                         @can ("update", $thread)
                             <form action="{{ $thread->path() }}" method="POST">
                                 {{ csrf_field() }}
@@ -24,14 +24,17 @@
                     </div>
                 </div>
 
-                <div class="panel-body">
+                <div class="card-body">
                     {{ $thread->body }}
                 </div>
             </div>
-
+            <br>
+            
             @foreach ($replies as $reply)
                 @include ("threads.reply")
-            @endforeach     
+                <br>
+            @endforeach    
+
 
             {{ $replies->links() }}
 
@@ -51,8 +54,8 @@
         </div>
 
         <div class="col-md-4">
-            <div class="panel panel-default">
-                <div class="panel-body">
+            <div class="card">
+                <div class="card-body">
                     This thread was published {{ $thread->created_at->diffForHumans() }} by 
                     <a href="">{{ $thread->creator->name }}</a>, and currently 
                     has {{ $thread->replies_count }} {{ str_plural("comment", $thread->replies_count) }}.

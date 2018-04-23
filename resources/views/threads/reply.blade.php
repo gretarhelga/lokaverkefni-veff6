@@ -1,6 +1,6 @@
-<div id="reply-{{ $reply->id }}" class="panel panel-default">
+<div id="reply-{{ $reply->id }}" class="card">
 
-    <div class="panel-heading">
+    <div class="card-header">
     	<div class="level">
     		<h5 class="flex">
 		        <a href="{{ route("profile", $reply->owner) }}">
@@ -20,7 +20,7 @@
         </div>
     </div>
 
-    <div class="panel-body">
+    <div class="card-body">
         {{ $reply->body }}
     </div>
 
