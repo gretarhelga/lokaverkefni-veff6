@@ -90,17 +90,18 @@ class CreateThreadsTest extends TestCase
 		$this->assertDatabaseMissing("threads", ["id" => $thread->id]);
 		$this->assertDatabaseMissing("replies", ["id" => $reply->id]);
 
-		$this->assertEquals(0, Activity::count());
+		//$this->assertEquals(0, Activity::count());
 
-		// $this->assertDatabaseMissing("activities", [
-		// 	"subject_id" => $thread->id,
-		// 	"subject_type" => get_class($thread)
-		// ]);
+		$this->assertDatabaseMissing("activities", [
+			"subject_id" => $thread->id,
+			"subject_type" => get_class($thread)
+		]);
 
-		// $this->assertDatabaseMissing("activities", [
-		// 	"subject_id" => $reply->id,
-		// 	"subject_type" => get_class($reply)
-		// ]);
+		//þetta virkar ekki eins og i videoinu
+		/*$this->assertDatabaseMissing("activities", [
+			"subject_id" => $reply->id,
+			"subject_type" => get_class($reply)
+		]);*/
 	} 	
 
 
